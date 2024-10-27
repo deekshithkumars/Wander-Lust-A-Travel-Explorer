@@ -24,6 +24,10 @@ body{
     color: #222222 !important;
 }
 
+.navbar-collapse{
+    background-color: white;
+}
+
 .fa-compass{
     color: red;
     font-size: 2rem;

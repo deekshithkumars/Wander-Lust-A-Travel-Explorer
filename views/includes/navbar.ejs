@@ -25,6 +25,33 @@
     padding: 0.5rem 3rem 0.5rem 3rem;
     font-size: 0.9rem;
   }
+    /* Media query: Search bar outside navbar and above filters on mobile */
+    @media (max-width: 576px) {
+            .navbar-nav {
+                flex-direction: column;
+            }
+
+            .mobile-search {
+                display: block;
+                width: 50%;
+                padding: 0.5rem;
+                background-color: #f8f9fa;
+            }
+
+            .mobile-search form {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .search-input {
+                width: 150%;
+                margin-bottom: 0.5rem;
+            }
+
+            .search-btn {
+                width: 100%;
+            }
+        }
 </style>
 <body>
     <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
