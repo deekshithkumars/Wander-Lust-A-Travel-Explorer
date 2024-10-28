@@ -1,26 +1,73 @@
 <% layout('/layouts/boilerplate') -%>
 <body>
-    <!-- <h2>All listings..</h2> -->
-    <!-- <form method="GET" action="/listing/new">
-        <button>create listing</button>
-    </form> -->
+    
     <style>
-        #filters{
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-        }
+        
 
-        /* Default: Desktop layout (4 columns) */
-        @media (min-width: 601px) {
-            #filters {
-              grid-template-columns: repeat(4, 1fr);
-            }
-        }
+        /* Main filter container with horizontal scrolling */
+.filter-container {
+    display: flex;
+    overflow-x: auto; /* Horizontal scrolling */
+    white-space: nowrap; /* Prevent line breaks */
+    gap: 20px; /* Space between items */
+    padding: 10px 0;
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+/* Hide scrollbar for Webkit browsers (Chrome, Safari) */
+.filter-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Individual filter item styling */
+.filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 6rem; /* Width of each item */
+    margin-right: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    opacity: 0.7;
+    font-size: small;
+    cursor: pointer;
+}
+
+.filter div {
+    font-size: 1rem; /* Icon size */
+    margin-bottom: 5px;
+}
+
+.filter p {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Optional: Add some space between icon and text */
+.filter i {
+    margin-bottom: 5px;
+}
+
+/* Adjust layout for smaller screens */
+@media (max-width: 768px) {
+    .filter-container {
+        padding: 10px;
+        overflow-x: scroll; /* Enable horizontal scrolling on mobile */
+    }
+}
+
+.scroll-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+       
+
 
         .filter{
-            margin-right: 2rem;
+            margin-right: 1rem;
             margin-top: 2rem;
             margin-bottom: 2rem;
             text-align: center;
@@ -30,96 +77,81 @@
         .filter:hover{
             opacity: 1;
             cursor: pointer;
-        }
-        .tax-info{
-            display: none;
-        }
-        #tax-toggle{
-            margin-left: 2rem;
-            margin-top: 0.8rem;
-            border: 1px solid black;
-            border-radius: 0.75rem;
-            height: 2.5rem;
-            padding: 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        #tax-toggle div{
-            margin-top: 0.3rem;
-        }
-       /* Media Query for small screens (mobile) */
-@media (max-width: 600px) {
-    #filters {
-        grid-template-columns: repeat(2, 1fr); /* At least two filters side-by-side */
-    }
+        } 
+        
+       
 
-    .filter {
-        margin: 0.5rem;
-        font-size: 0.8rem;
-    }
 
-    /* Show #tax-toggle as the last item for mobile */
-    #tax-toggle {
-        display: flex;
-        grid-column: span 2; /* Make it stretch across two columns */
-    }
+/* Scroll indicator styling */
+.scroll-indicator {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: white;
+    padding: 5px;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* Chevron icon size */
+.scroll-indicator i {
+    font-size: 18px;
+    color: #555;
 }
 
 
     </style>
-    <div id="filters" >
-        <div class="filter">
-            <div><i class="fa-solid fa-fire"></i></div>
-            <p>Trending</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-bed"></i></div>
-            <p>Rooms</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-mountain-city"></i></div>
-            <p>Iconic Cities</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-mountain-sun"></i></div>
-            <p>Mountains</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-brands fa-fort-awesome"></i></div>
-            <p>Castles</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-person-swimming"></i></div>
-            <p>Amazing Pools</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-campground"></i></div>
-            <p>Camping</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-cow"></i></div>
-            <p>Farms</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-brands fa-galactic-republic"></i></div>
-            <p>Arctic</p>
-        </div>
-<<<<<<< HEAD
-        <div id="tax-toggle" class="filter">
-=======
-        <div class="filter">
-            <div><i class="fa-solid fa-igloo"></i></div>
-            <p>Domes</p>
-        </div>
-        <div id="tax-toggle">
->>>>>>> ca031e83095330d12d538d803c392bf36bec2dd5
-            <div class="form-check form-switch form-check-reverse">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckReverse">
-                <label class="form-check-label" for="flexSwitchCheckReverse">Display total after taxes</label>
+    <div class="scroll-wrapper">
+        <div class="filter-container" >
+            <div class="filter">
+                <div><i class="fa-solid fa-fire"></i></div>
+                <p>Trending</p>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-bed"></i></div>
+                <p>Rooms</p>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-mountain-city"></i></div>
+                <p>Iconic Cities</p>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-mountain-sun"></i></div>
+                <p>Mountains</p>
+            </div>
+            <div class="filter">
+                <div><i class="fa-brands fa-fort-awesome"></i></div>
+                <p>Castles</p>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-person-swimming"></i></div>
+                <p>Amazing Pools</p>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-campground"></i></div>
+                <p>Camping</p>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-cow"></i></div>
+                <p>Farms</p>
+            </div>
+            <div class="filter">
+                <div><i class="fa-brands fa-galactic-republic"></i></div>
+                <p>Arctic</p>
+            </div>
+            <div class="filter">
+                <div><i class="fa-solid fa-igloo"></i></div>
+                <p>Domes</p>
             </div>
         </div>
+        <div class="scroll-indicator">
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
     </div>
+    
         <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1 row-cols-xs-1">
             <% for(listing of allListings){%>
                 <a href="/listing/<%=listing._id%>" class="listing-link">
@@ -138,17 +170,16 @@
             <%}%>
         </div>
         <script>
-            let taxSwitch=document.getElementById('flexSwitchCheckReverse');
-            taxSwitch.addEventListener('click',()=>{
-                let taxInfo=document.getElementsByClassName('tax-info');
-                for(info of taxInfo){
-                    if(info.style.display !="inline"){
-                        info.style.display="inline"
-                    }else{
-                        info.style.display="none"
-                    }
-                }
-            })
+            // JavaScript to trigger horizontal scroll when clicking the indicator
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            const scrollContainer = document.querySelector('.filter-container');
+    
+            scrollIndicator.addEventListener('click', () => {
+                scrollContainer.scrollBy({
+                    left: 300,  // Adjust scroll distance as needed
+                    behavior: 'smooth'  // Smooth scrolling effect
+                });
+            });
         </script>
 </body>
 <!-- toLocaleString("en-IN") -->

@@ -25,7 +25,11 @@
     padding: 0.5rem 3rem 0.5rem 3rem;
     font-size: 0.9rem;
   }
-    /* Media query: Search bar outside navbar and above filters on mobile */
+  .tax-info{
+    display: none;
+  }
+  
+    
     @media (max-width: 576px) {
             .navbar-nav {
                 flex-direction: column;
@@ -51,7 +55,20 @@
             .search-btn {
                 width: 100%;
             }
+
+            .total-taxes {
+                display: flex;
+                align-items: center; /* Align toggle with text */
+                justify-content: flex-start;
+                gap: 10px;
+                width: 100%;
+            }
+            
+            
         }
+
+        
+        
 </style>
 <body>
     <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
@@ -81,11 +98,32 @@
               <!-- if logged in => display logout-->
               <%if(currUser){%>
                 <a class="nav-link" href="/listing/new">Airbnb your home</a>
-              <a class="nav-link" href="/logout">Log out</a>
+                  <div class="nav-link total-taxes" >
+                    <div  class="form-check form-switch form-check-reverse ">
+                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckReverse">
+                      <label class="form-check-label" for="flexSwitchCheckReverse">Total after taxes</label>
+                    </div>
+                  </div>
+                  
+                
+              <a class="nav-link" href="/logout"><b>Log out</b></a>
               <%}%>
             </div>
           </div>
         </div>
       </nav>
 </body>
+<script>
+  let taxSwitch=document.getElementById('flexSwitchCheckReverse');
+  taxSwitch.addEventListener('click',()=>{
+      let taxInfo=document.getElementsByClassName('tax-info');
+      for(info of taxInfo){
+          if(info.style.display !="inline"){
+              info.style.display="inline"
+          }else{
+              info.style.display="none"
+          }
+      }
+  })
+</script>
 </html>
